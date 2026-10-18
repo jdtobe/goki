@@ -1,0 +1,457 @@
+/*
+ * goki themes
+ *
+ * A theme is a set of CSS custom properties scoped to [data-theme="<id>"].
+ * Because the selector is not tied to :root, any element can preview a theme
+ * simply by carrying the attribute (the theme picker relies on this).
+ *
+ * See docs/theming.md for the full token reference and how to add your own.
+ */
+
+@font-face {
+  font-family: "InterVariable";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/InterVariable.woff2") format("woff2");
+}
+
+/* ---------------------------------------------------------------------------
+ * Shared defaults. Every theme inherits these and overrides what it needs.
+ * ------------------------------------------------------------------------- */
+[data-theme] {
+  --font-ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "InterVariable", "Inter", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "InterVariable", "Inter", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  --font-text: var(--font-ui);
+  --font-heading: var(--font-display);
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  --font-serif: ui-serif, "New York", "Iowan Old Style", "Charter", "Source Serif Pro", Georgia, serif;
+
+  --text-size: 16.5px;
+  --text-leading: 1.7;
+  --heading-weight: 700;
+  --heading-tracking: -0.022em;
+
+  --frame-gap: 10px;
+  --panel-radius: 18px;
+  --control-radius: 9px;
+  --sidebar-w: 280px;
+
+  --glass-blur: 28px;
+  --glass-saturate: 180%;
+  --panel-blur: 0px;
+
+  --backdrop: none;
+  --orb-1: transparent;
+  --orb-2: transparent;
+  --orb-3: transparent;
+  --orb-opacity: 0;
+  --orb-animation: none;
+
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --danger: #ff3b30;
+  --success: #34c759;
+  --warning: #ff9f0a;
+  /* Callout colors: accessible variants for light themes... */
+  --c-note: #0066cc;
+  --c-tip: #1f7a36;
+  --c-important: #8944ab;
+  --c-warning: #a35200;
+  --c-caution: #c4001a;
+}
+
+/* ...and luminous variants for dark ones. */
+[data-theme="graphite"], [data-theme="nebula"], [data-theme="aurora"] {
+  --c-note: #4aa3ff;
+  --c-tip: #32d74b;
+  --c-important: #da8fff;
+  --c-warning: #ffb340;
+  --c-caution: #ff6961;
+}
+
+/* ---------------------------------------------------------------------------
+ * Daylight — crisp, airy, unmistakably at home on a Retina display.
+ * ------------------------------------------------------------------------- */
+[data-theme="daylight"] {
+  color-scheme: light;
+  --bg: #f2f2f5;
+  --backdrop:
+    radial-gradient(1200px 600px at 0% 0%, rgba(0, 122, 255, 0.07), transparent 60%),
+    radial-gradient(900px 600px at 100% 100%, rgba(255, 45, 135, 0.05), transparent 60%);
+  --surface: #ffffff;
+  --surface-2: #f7f7f9;
+  --surface-3: #efeff2;
+  --glass: rgba(250, 250, 252, 0.72);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+  --panel-border: rgba(0, 0, 0, 0.055);
+  --text: #1d1d1f;
+  --text-2: #6e6e73;
+  --text-3: #a1a1a6;
+  --accent: #0071e3;
+  --accent-hover: #0077ed;
+  --accent-contrast: #ffffff;
+  --accent-soft: color-mix(in srgb, var(--accent) 10%, transparent);
+  --link: #0066cc;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.14);
+  --hover: rgba(0, 0, 0, 0.045);
+  --active: rgba(0, 0, 0, 0.08);
+  --selected: color-mix(in srgb, var(--accent) 11%, transparent);
+  --selected-text: color-mix(in srgb, var(--accent) 82%, var(--text));
+  --code-bg: #f5f5f7;
+  --code-text: #1d1d1f;
+  --inline-code-bg: rgba(0, 0, 0, 0.05);
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.02);
+  --shadow-2: 0 10px 30px -10px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+  --shadow-3: 0 30px 80px -20px rgba(0, 0, 0, 0.28), 0 0 0 0.5px rgba(0, 0, 0, 0.08);
+  --scrim: rgba(250, 250, 252, 0.45);
+  --hl-keyword: #ad3da4;
+  --hl-string: #c41a16;
+  --hl-number: #1c00cf;
+  --hl-comment: #707f8c;
+  --hl-function: #3e8087;
+  --hl-type: #0b4f79;
+  --hl-attr: #836c28;
+  --hl-meta: #643820;
+}
+
+/* ---------------------------------------------------------------------------
+ * Graphite — deep, quiet, true-black friendly dark mode.
+ * ------------------------------------------------------------------------- */
+[data-theme="graphite"] {
+  color-scheme: dark;
+  --bg: #000000;
+  --backdrop:
+    radial-gradient(1000px 500px at 10% -10%, rgba(10, 132, 255, 0.12), transparent 60%),
+    radial-gradient(800px 500px at 110% 110%, rgba(191, 90, 242, 0.08), transparent 60%);
+  --surface: #141416;
+  --surface-2: #1c1c1f;
+  --surface-3: #242428;
+  --glass: rgba(28, 28, 31, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --glass-highlight: rgba(255, 255, 255, 0.06);
+  --panel-border: rgba(255, 255, 255, 0.07);
+  --text: #f5f5f7;
+  --text-2: #a1a1a6;
+  --text-3: #6e6e73;
+  --accent: #0a84ff;
+  --accent-hover: #409cff;
+  --accent-contrast: #ffffff;
+  --accent-soft: color-mix(in srgb, var(--accent) 16%, transparent);
+  --link: #4aa3ff;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --hover: rgba(255, 255, 255, 0.055);
+  --active: rgba(255, 255, 255, 0.1);
+  --selected: color-mix(in srgb, var(--accent) 20%, transparent);
+  --selected-text: color-mix(in srgb, var(--accent) 82%, var(--text));
+  --code-bg: #1c1c1f;
+  --code-text: #e6e6e9;
+  --inline-code-bg: rgba(255, 255, 255, 0.08);
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-2: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 0 0.5px rgba(255, 255, 255, 0.05);
+  --shadow-3: 0 30px 80px -20px rgba(0, 0, 0, 0.85), 0 0 0 0.5px rgba(255, 255, 255, 0.1);
+  --scrim: rgba(0, 0, 0, 0.45);
+  --hl-keyword: #ff7ab2;
+  --hl-string: #ff8170;
+  --hl-number: #d9c97c;
+  --hl-comment: #7f8c98;
+  --hl-function: #67b7a4;
+  --hl-type: #5dd8ff;
+  --hl-attr: #dabaff;
+  --hl-meta: #fd8f3f;
+}
+
+/* ---------------------------------------------------------------------------
+ * Glass — luminous layered glass over a soft, living color field.
+ * ------------------------------------------------------------------------- */
+[data-theme="glass"] {
+  color-scheme: light;
+  --bg: #eef1f8;
+  --backdrop:
+    radial-gradient(900px 700px at 0% 0%, #dbe8ff 0%, transparent 60%),
+    radial-gradient(800px 700px at 100% 0%, #fde3f1 0%, transparent 60%),
+    radial-gradient(900px 800px at 50% 100%, #dcf7ee 0%, transparent 65%),
+    linear-gradient(180deg, #f3f5fb, #eef1f8);
+  --orb-1: #8ab6ff;
+  --orb-2: #ffa8d6;
+  --orb-3: #8ff0cf;
+  --orb-opacity: 0.55;
+  --orb-animation: orb-drift 38s ease-in-out infinite alternate;
+  --surface: rgba(255, 255, 255, 0.62);
+  --surface-2: rgba(255, 255, 255, 0.5);
+  --surface-3: rgba(255, 255, 255, 0.72);
+  --glass: rgba(255, 255, 255, 0.42);
+  --glass-blur: 40px;
+  --glass-saturate: 200%;
+  --panel-blur: 36px;
+  --glass-border: rgba(255, 255, 255, 0.75);
+  --glass-highlight: rgba(255, 255, 255, 0.95);
+  --panel-border: rgba(255, 255, 255, 0.8);
+  --text: #0c0d12;
+  --text-2: #5a5d6b;
+  --text-3: #9295a3;
+  --accent: #007aff;
+  --accent-hover: #1a88ff;
+  --accent-contrast: #ffffff;
+  --accent-soft: color-mix(in srgb, var(--accent) 12%, transparent);
+  --link: #0068e0;
+  --border: rgba(20, 30, 60, 0.08);
+  --border-strong: rgba(20, 30, 60, 0.14);
+  --hover: rgba(255, 255, 255, 0.55);
+  --active: rgba(255, 255, 255, 0.8);
+  --selected: rgba(255, 255, 255, 0.85);
+  --selected-text: color-mix(in srgb, var(--accent) 85%, black);
+  --code-bg: rgba(255, 255, 255, 0.55);
+  --code-text: #13141a;
+  --inline-code-bg: rgba(255, 255, 255, 0.7);
+  --shadow-1: 0 1px 2px rgba(30, 40, 90, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --shadow-2: 0 12px 40px -12px rgba(40, 60, 140, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  --shadow-3: 0 40px 100px -24px rgba(40, 60, 140, 0.4), inset 0 1px 0 rgba(255, 255, 255, 1), 0 0 0 0.5px rgba(255, 255, 255, 0.6);
+  --scrim: rgba(230, 236, 250, 0.35);
+  --hl-keyword: #9b2fae;
+  --hl-string: #c2261c;
+  --hl-number: #2f3ad6;
+  --hl-comment: #7d8597;
+  --hl-function: #1f7a83;
+  --hl-type: #0b5a8c;
+  --hl-attr: #8a6b14;
+  --hl-meta: #8a4b22;
+}
+
+/* ---------------------------------------------------------------------------
+ * Nebula — spatial dark glass floating in deep space.
+ * ------------------------------------------------------------------------- */
+[data-theme="nebula"] {
+  color-scheme: dark;
+  --bg: #07070f;
+  --backdrop:
+    radial-gradient(900px 700px at 10% 0%, rgba(98, 70, 234, 0.45), transparent 60%),
+    radial-gradient(800px 700px at 100% 30%, rgba(20, 110, 190, 0.38), transparent 60%),
+    radial-gradient(900px 700px at 40% 110%, rgba(190, 50, 140, 0.32), transparent 60%),
+    linear-gradient(180deg, #0b0b19, #07070f);
+  --orb-1: #6d5dfc;
+  --orb-2: #2aa7ff;
+  --orb-3: #e04fb0;
+  --orb-opacity: 0.42;
+  --orb-animation: orb-drift 46s ease-in-out infinite alternate;
+  --surface: rgba(30, 30, 52, 0.5);
+  --surface-2: rgba(255, 255, 255, 0.05);
+  --surface-3: rgba(255, 255, 255, 0.09);
+  --glass: rgba(36, 36, 62, 0.4);
+  --glass-blur: 44px;
+  --glass-saturate: 170%;
+  --panel-blur: 44px;
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-highlight: rgba(255, 255, 255, 0.14);
+  --panel-border: rgba(255, 255, 255, 0.11);
+  --text: #ffffff;
+  --text-2: rgba(235, 235, 255, 0.68);
+  --text-3: rgba(235, 235, 255, 0.42);
+  --accent: #a593ff;
+  --accent-hover: #b8aaff;
+  --accent-contrast: #0b0b19;
+  --accent-soft: color-mix(in srgb, var(--accent) 18%, transparent);
+  --link: #b9adff;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --hover: rgba(255, 255, 255, 0.07);
+  --active: rgba(255, 255, 255, 0.12);
+  --selected: rgba(255, 255, 255, 0.14);
+  --selected-text: #ffffff;
+  --code-bg: rgba(0, 0, 0, 0.28);
+  --code-text: #ecebff;
+  --inline-code-bg: rgba(255, 255, 255, 0.1);
+  --shadow-1: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --shadow-2: 0 20px 50px -16px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  --shadow-3: 0 40px 120px -20px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 0 0 0.5px rgba(255, 255, 255, 0.14);
+  --scrim: rgba(5, 5, 15, 0.4);
+  --hl-keyword: #ff8ad8;
+  --hl-string: #ffb08a;
+  --hl-number: #ffe08a;
+  --hl-comment: #8c8bb3;
+  --hl-function: #7ce7d6;
+  --hl-type: #8ad0ff;
+  --hl-attr: #cdb8ff;
+  --hl-meta: #ffb86b;
+}
+
+/* ---------------------------------------------------------------------------
+ * Aurora — polar light drifting slowly behind smoked glass.
+ * ------------------------------------------------------------------------- */
+[data-theme="aurora"] {
+  color-scheme: dark;
+  --bg: #03060b;
+  --backdrop:
+    radial-gradient(1200px 500px at 30% -10%, rgba(16, 185, 129, 0.28), transparent 65%),
+    radial-gradient(900px 500px at 90% 0%, rgba(56, 189, 248, 0.22), transparent 60%),
+    linear-gradient(180deg, #06101a, #03060b 70%);
+  --orb-1: #10e0a8;
+  --orb-2: #3fb5ff;
+  --orb-3: #8b5cf6;
+  --orb-opacity: 0.38;
+  --orb-animation: orb-aurora 24s ease-in-out infinite alternate;
+  --surface: rgba(8, 14, 22, 0.66);
+  --surface-2: rgba(255, 255, 255, 0.04);
+  --surface-3: rgba(255, 255, 255, 0.08);
+  --glass: rgba(10, 18, 28, 0.5);
+  --glass-blur: 36px;
+  --panel-blur: 30px;
+  --glass-border: rgba(160, 255, 230, 0.1);
+  --glass-highlight: rgba(200, 255, 240, 0.1);
+  --panel-border: rgba(160, 255, 230, 0.09);
+  --text: #eafff8;
+  --text-2: rgba(210, 240, 235, 0.66);
+  --text-3: rgba(210, 240, 235, 0.4);
+  --accent: #2ee6b8;
+  --accent-hover: #5cf0cb;
+  --accent-contrast: #022018;
+  --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+  --link: #5ef0cc;
+  --border: rgba(180, 255, 235, 0.08);
+  --border-strong: rgba(180, 255, 235, 0.16);
+  --hover: rgba(180, 255, 235, 0.06);
+  --active: rgba(180, 255, 235, 0.1);
+  --selected: color-mix(in srgb, var(--accent) 15%, transparent);
+  --selected-text: color-mix(in srgb, var(--accent) 82%, var(--text));
+  --code-bg: rgba(0, 0, 0, 0.35);
+  --code-text: #dcfff4;
+  --inline-code-bg: rgba(180, 255, 235, 0.08);
+  --shadow-1: inset 0 1px 0 rgba(200, 255, 240, 0.05);
+  --shadow-2: 0 20px 50px -16px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(200, 255, 240, 0.08);
+  --shadow-3: 0 40px 120px -20px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(200, 255, 240, 0.12), 0 0 0 0.5px rgba(160, 255, 230, 0.14);
+  --scrim: rgba(2, 6, 10, 0.45);
+  --hl-keyword: #c792ea;
+  --hl-string: #9ef0a0;
+  --hl-number: #f7c46c;
+  --hl-comment: #6f8f8a;
+  --hl-function: #6fe3ff;
+  --hl-type: #2ee6b8;
+  --hl-attr: #ffcb8b;
+  --hl-meta: #ff9e80;
+}
+
+/* ---------------------------------------------------------------------------
+ * Dune — warm paper and sunset light, set in a reading serif.
+ * ------------------------------------------------------------------------- */
+[data-theme="dune"] {
+  color-scheme: light;
+  --font-text: var(--font-serif);
+  --font-heading: var(--font-serif);
+  --text-size: 18px;
+  --text-leading: 1.72;
+  --heading-weight: 650;
+  --heading-tracking: -0.012em;
+  --bg: #efe6da;
+  --backdrop:
+    radial-gradient(1100px 600px at 100% 0%, rgba(255, 166, 99, 0.22), transparent 60%),
+    radial-gradient(900px 600px at 0% 100%, rgba(232, 120, 84, 0.12), transparent 60%),
+    linear-gradient(180deg, #f3ebe0, #ede3d6);
+  --surface: #fbf7f1;
+  --surface-2: #f4ede3;
+  --surface-3: #ece3d6;
+  --glass: rgba(246, 239, 229, 0.74);
+  --glass-border: rgba(120, 80, 40, 0.08);
+  --glass-highlight: rgba(255, 252, 246, 0.85);
+  --panel-border: rgba(120, 80, 40, 0.08);
+  --text: #2a2017;
+  --text-2: #7a6957;
+  --text-3: #ab9a87;
+  --accent: #c8582a;
+  --accent-hover: #d6652f;
+  --accent-contrast: #fffaf3;
+  --accent-soft: color-mix(in srgb, var(--accent) 11%, transparent);
+  --link: #b24c20;
+  --border: rgba(90, 60, 30, 0.1);
+  --border-strong: rgba(90, 60, 30, 0.18);
+  --hover: rgba(90, 60, 30, 0.05);
+  --active: rgba(90, 60, 30, 0.09);
+  --selected: color-mix(in srgb, var(--accent) 12%, transparent);
+  --selected-text: color-mix(in srgb, var(--accent) 82%, var(--text));
+  --code-bg: #f3ebdf;
+  --code-text: #3a2c1f;
+  --inline-code-bg: rgba(90, 60, 30, 0.07);
+  --shadow-1: 0 1px 2px rgba(90, 60, 30, 0.06);
+  --shadow-2: 0 12px 34px -12px rgba(90, 60, 30, 0.2), 0 2px 6px rgba(90, 60, 30, 0.05);
+  --shadow-3: 0 30px 80px -20px rgba(90, 50, 20, 0.35), 0 0 0 0.5px rgba(90, 60, 30, 0.1);
+  --scrim: rgba(239, 230, 218, 0.45);
+  --hl-keyword: #a1356b;
+  --hl-string: #4d7a2a;
+  --hl-number: #b4531c;
+  --hl-comment: #9a8a76;
+  --hl-function: #2d6d7a;
+  --hl-type: #7a4a9a;
+  --hl-attr: #8a6514;
+  --hl-meta: #8a4b22;
+}
+
+/* ---------------------------------------------------------------------------
+ * Ink — editorial monochrome. No glass, no color, just type.
+ * ------------------------------------------------------------------------- */
+[data-theme="ink"] {
+  color-scheme: light;
+  --font-heading: var(--font-serif);
+  --heading-weight: 600;
+  --heading-tracking: -0.018em;
+  --frame-gap: 0px;
+  --panel-radius: 0px;
+  --control-radius: 6px;
+  --glass-blur: 0px;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f6f6f5;
+  --surface-3: #eeeeec;
+  --glass: #fafaf9;
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-highlight: transparent;
+  --panel-border: transparent;
+  --text: #0a0a0a;
+  --text-2: #5c5c5c;
+  --text-3: #9a9a9a;
+  --accent: #0a0a0a;
+  --accent-hover: #2a2a2a;
+  --accent-contrast: #ffffff;
+  --accent-soft: color-mix(in srgb, var(--accent) 6%, transparent);
+  --link: #0a0a0a;
+  --border: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.22);
+  --hover: rgba(0, 0, 0, 0.04);
+  --active: rgba(0, 0, 0, 0.08);
+  --selected: rgba(0, 0, 0, 0.07);
+  --selected-text: #000000;
+  --code-bg: #f6f6f5;
+  --code-text: #111111;
+  --inline-code-bg: rgba(0, 0, 0, 0.055);
+  --shadow-1: none;
+  --shadow-2: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 8px 24px -8px rgba(0, 0, 0, 0.12);
+  --shadow-3: 0 0 0 1px rgba(0, 0, 0, 0.14), 0 24px 60px -16px rgba(0, 0, 0, 0.25);
+  --scrim: rgba(255, 255, 255, 0.6);
+  --c-note: #0a0a0a;
+  --c-tip: #0a0a0a;
+  --c-important: #0a0a0a;
+  --c-warning: #0a0a0a;
+  --c-caution: #0a0a0a;
+  --hl-keyword: #000000;
+  --hl-string: #5c5c5c;
+  --hl-number: #000000;
+  --hl-comment: #9a9a9a;
+  --hl-function: #000000;
+  --hl-type: #333333;
+  --hl-attr: #333333;
+  --hl-meta: #5c5c5c;
+}
+
+@keyframes orb-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6vw, 4vh, 0) scale(1.08); }
+  100% { transform: translate3d(-4vw, 8vh, 0) scale(0.96); }
+}
+
+@keyframes orb-aurora {
+  0% { transform: translate3d(-8vw, 0, 0) rotate(-8deg) scaleX(1.2); }
+  50% { transform: translate3d(4vw, 3vh, 0) rotate(4deg) scaleX(1.5); }
+  100% { transform: translate3d(10vw, -2vh, 0) rotate(10deg) scaleX(1.1); }
+}

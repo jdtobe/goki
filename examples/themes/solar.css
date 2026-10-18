@@ -1,0 +1,72 @@
+/* @name Solar Flare
+   @scheme dark
+
+   An example custom theme for goki. Copy it to .goki/themes/solar.css in a
+   wiki, or to ~/.config/goki/themes/solar.css for every wiki, then choose it
+   under Appearance. Unset tokens fall back to goki's shared defaults; see
+   docs/themes.md for the full list. */
+
+[data-theme="solar"] {
+  color-scheme: dark;
+
+  --bg: #0f0805;
+  --backdrop:
+    radial-gradient(900px 600px at 0% 0%, rgba(255, 122, 47, 0.38), transparent 60%),
+    radial-gradient(800px 600px at 100% 100%, rgba(255, 45, 85, 0.22), transparent 60%),
+    linear-gradient(180deg, #160b06, #0f0805);
+  --orb-1: #ff7a2f;
+  --orb-2: #ff2d55;
+  --orb-3: #ffb340;
+  --orb-opacity: 0.3;
+  --orb-animation: orb-drift 40s ease-in-out infinite alternate;
+
+  --surface: rgba(28, 16, 10, 0.68);
+  --surface-2: rgba(255, 255, 255, 0.04);
+  --surface-3: rgba(255, 255, 255, 0.08);
+  --panel-blur: 32px;
+  --glass: rgba(38, 22, 12, 0.5);
+  --glass-blur: 36px;
+  --glass-border: rgba(255, 190, 150, 0.12);
+  --panel-border: rgba(255, 190, 150, 0.1);
+
+  --text: #fff4ea;
+  --text-2: rgba(255, 228, 208, 0.68);
+  --text-3: rgba(255, 228, 208, 0.42);
+
+  --accent: #ff7a2f;
+  --accent-hover: #ff9152;
+  --accent-contrast: #1a0b02;
+  --accent-soft: color-mix(in srgb, var(--accent) 16%, transparent);
+  --link: #ffa36b;
+
+  --border: rgba(255, 210, 180, 0.09);
+  --border-strong: rgba(255, 210, 180, 0.18);
+  --hover: rgba(255, 210, 180, 0.06);
+  --active: rgba(255, 210, 180, 0.11);
+  --selected: color-mix(in srgb, var(--accent) 18%, transparent);
+  --selected-text: #ffb98f;
+
+  --code-bg: rgba(0, 0, 0, 0.32);
+  --code-text: #ffeadb;
+  --inline-code-bg: rgba(255, 210, 180, 0.09);
+
+  --shadow-1: inset 0 1px 0 rgba(255, 220, 200, 0.06);
+  --shadow-2: 0 20px 50px -16px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 220, 200, 0.08);
+  --shadow-3: 0 40px 120px -20px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 220, 200, 0.12);
+  --scrim: rgba(10, 4, 2, 0.45);
+
+  --c-note: #6cb6ff;
+  --c-tip: #5ee08a;
+  --c-important: #e29bff;
+  --c-warning: #ffc04d;
+  --c-caution: #ff6b6b;
+
+  --hl-keyword: #ff8a65;
+  --hl-string: #ffd479;
+  --hl-number: #ff5e8a;
+  --hl-comment: #9c8274;
+  --hl-function: #7fdbca;
+  --hl-type: #ffb86b;
+  --hl-attr: #f7a8d8;
+  --hl-meta: #ff9e80;
+}

@@ -1,0 +1,22 @@
+// Dev container for goki — https://containers.dev
+{
+  "name": "goki",
+  "image": "mcr.microsoft.com/devcontainers/go:1-1.24-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
+  "forwardPorts": [4242],
+  "portsAttributes": {
+    "4242": { "label": "goki", "onAutoForward": "openBrowser" }
+  },
+  "postCreateCommand": "go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest && go mod download",
+  "customizations": {
+    "vscode": {
+      "extensions": ["golang.go", "editorconfig.editorconfig"],
+      "settings": {
+        "go.lintTool": "golangci-lint",
+        "gopls": { "buildFlags": ["-tags=webview"] }
+      }
+    }
+  }
+}

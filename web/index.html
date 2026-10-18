@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" data-theme-pref="[[.Theme]]" data-theme="daylight">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="generator" content="goki [[.Version]]">
+  <title>[[.Title]]</title>
+  <link rel="icon" href="/-/static/img/icon.svg?v=[[.Version]]" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/-/static/img/icon.svg?v=[[.Version]]">
+  <link rel="stylesheet" href="/-/static/css/themes.css?v=[[.Version]]">
+  <link rel="stylesheet" href="/-/static/css/app.css?v=[[.Version]]">
+  <link rel="stylesheet" href="/-/static/css/content.css?v=[[.Version]]">
+  [[- range .Themes]]
+  <link rel="stylesheet" href="/-/themes/[[.ID]].css" data-custom-theme="[[.ID]]">
+  [[- end]]
+  <script src="/-/static/js/boot.js?v=[[.Version]]"></script>
+  <script src="/-/static/vendor/marked.min.js?v=[[.Version]]" defer></script>
+  <script src="/-/static/vendor/purify.min.js?v=[[.Version]]" defer></script>
+  <script src="/-/static/vendor/highlight.min.js?v=[[.Version]]" defer></script>
+  <script type="module" src="/-/static/js/app.js?v=[[.Version]]"></script>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
+
+  <div class="app" id="app">
+    <aside class="sidebar" id="sidebar" aria-label="Navigation">
+      <div class="sidebar-head">
+        <a class="brand" href="/" data-nav>
+          <img class="brand-mark" src="/-/static/img/icon.svg?v=[[.Version]]" alt="" width="26" height="26">
+          <span class="brand-title" id="brand-title">[[.Title]]</span>
+        </a>
+        <button class="icon-btn" data-action="toggle-sidebar" data-tip="Hide sidebar" data-kbd="⌘\"><i data-icon="sidebar"></i></button>
+      </div>
+      <button class="search-field" data-action="palette">
+        <i data-icon="search"></i><span>Search</span><kbd class="kbd-hint" data-kbd-mod>⌘K</kbd>
+      </button>
+      <nav class="tree" id="tree" aria-label="Pages"></nav>
+      <div class="sidebar-foot">
+        <button class="foot-btn" data-action="new-page" data-requires-write><i data-icon="doc-plus"></i><span>New Page</span></button>
+        <button class="icon-btn" data-action="new-folder" data-requires-write data-tip="New folder"><i data-icon="folder-plus"></i></button>
+        <button class="icon-btn" data-action="appearance" data-tip="Appearance"><i data-icon="palette"></i></button>
+      </div>
+      <div class="sidebar-resizer" id="sidebar-resizer" role="separator" aria-orientation="vertical" aria-label="Resize sidebar"></div>
+    </aside>
+
+    <main class="main" id="main">
+      <header class="toolbar" id="toolbar"></header>
+      <div class="scroller" id="scroller">
+        <div class="view" id="view">
+          <div class="skeleton" aria-busy="true"><span></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="sidebar-scrim" data-action="toggle-sidebar"></div>
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+  <noscript><div class="noscript">goki needs JavaScript to render your wiki.</div></noscript>
+</body>
+</html>

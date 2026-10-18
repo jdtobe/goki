@@ -1,0 +1,3 @@
+# Serves goki's own documentation: run `goki docs` from the repository root.
+title: goki
+theme: auto

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/jdtobe/goki/tree/master/docs
+    about: Guides for using, configuring and theming goki.
+  - name: Security vulnerability
+    url: https://github.com/jdtobe/goki/security/advisories/new
+    about: Please report security issues privately.
